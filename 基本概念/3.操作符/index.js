@@ -62,3 +62,139 @@
  *   当 k 能被 3 整除时，输出 "k 是 2 的公倍数" （k 需要替换为当前 k 的值）
  *   当 k 能被 5 整除时，输出 "k 是 2 的公倍数" （k 需要替换为当前 k 的值）
  */
+
+function test1() {
+  console.log("一元操作符:");
+  let a = 1;
+  let b = 1;
+  let str = "a";
+  let str2 = "2";
+  let bool = true;
+  let bool2 = false;
+  console.log(++a + 1);
+  console.log(b++ + 1);
+  console.log(str++);
+  console.log(bool--);
+  console.log(+str, +str2);
+  console.log(+bool, +bool2);
+  console.log(-str, -str2);
+  console.log(-bool, -bool2);
+
+  console.log("布尔操作符:");
+  console.log(!a); /** 非操作符操作数是非0数值返回false */
+  console.log(!str); /** 非操作符操作数是非空字符串返回false */
+  console.log(!bool); /** 非操作符操作数是boolean则将该值转化为数字后再判断 */
+  console.log(a && b); /** 两操作数都是对象，返回第二个数 */
+  console.log(a && bool2); /** 第二个操作数为false，返回false */
+  console.log(a || b); /** 第一个操作数为对象，返回第一个数 */
+  console.log(bool2 || str); /** 第一个操作数结果为false，返回第二个数 */
+
+  console.log("相等操作符:");
+  console.log(a == b); /** a与b类型相同 */
+  console.log(a === b); /** a与b数值，类型均相同 */
+  console.log(a == str2); /** 强制类型转化后两者都为数值，类型相同 */
+  console.log(a === str2); /** 两操作值类型不相同 */
+
+  console.log("条件操作符:");
+  console.log(a == b ? 'a等于b' : 'a不等于b');
+  console.log(a === str2 ? 'a全等于str2' : 'a不全等于str2');
+
+  console.log("if语句:");
+  if (a === str2) {
+    console.log("a === str2");
+  } else if (a === b) {
+    console.log("a === b");
+  } else {
+    console.log("a !== str2 且 a !== b");
+  };
+
+}
+
+function test2() {
+  console.log("while语句:");
+  let i = 5;
+  while (i > 0) {
+    i -= 1;
+    console.log(i);
+  };
+
+  let L = 5;
+  while (L > 0) {
+    L = --L;
+    console.log(L);
+  };
+}
+
+function test3() {
+  console.log("for循环");
+  for (let i = 5; i >= 0; i--) {
+    console.log(i);
+  }
+
+  for (let j = 0; j <= 10; j++) {
+    console.log(j);
+  }
+
+  for (let j = 1; j <= 10; j++) {
+    /** 0与任何数相除都为0,因此从1开始 */
+    if (j % 3 == 0 && j % 2 == 0) {
+      break;
+    } else if (j % 3 == 0) {
+      continue;
+    } else {
+      console.log(j);
+    }
+  }
+}
+
+function test4() {
+  console.log("swich:")
+  for (let k = 0; k <= 11; k++) {
+    console.log(k);
+    switch (k) {
+      case 3:
+        console.log("k = 3");
+        break;
+      case 5:
+        console.log("k = 5");
+        break;
+      case 7:
+      case 11:
+        console.log("k = 7或11");
+        break;
+    }
+  }
+}
+
+function test5() {
+  for (let n = 0; n <= 10; n++) {
+    if (n % 2 == 0 && n % 3 == 0 && n % 5 == 0 && n != 0) {
+      console.log(n + "是2的公倍数");
+      console.log(n + "是3的公倍数");
+      console.log(n + "是5的公倍数");
+    } else if (n % 2 == 0 && n % 3 == 0 && n != 0) {
+      console.log(n + "是2的公倍数");
+      console.log(n + "是3的公倍数");
+    } else if (n % 2 == 0 && n % 5 == 0 && n != 0) {
+      console.log(n + "是2的公倍数");
+      console.log(n + "是5的公倍数");
+    } else if (n % 3 == 0 && n % 5 == 0 && n != 0) {
+      console.log(n + "是3的公倍数");
+      console.log(n + "是5的公倍数");
+    } else if (n % 2 == 0 && n != 0) {
+      console.log(n + "是2的公倍数");
+    } else if (n % 3 == 0 && n != 0) {
+      console.log(n + "是3的公倍数");
+    } else if (n % 5 == 0 && n != 0) {
+      console.log(n + "是5的公倍数");
+    } else {
+    console.log(n);
+    }
+  }
+}
+
+test1();
+test2();
+test3();
+test4();
+test5();
