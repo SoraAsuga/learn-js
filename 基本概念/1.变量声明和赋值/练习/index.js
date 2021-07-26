@@ -5,8 +5,8 @@
  * 4. 在控制台分别输出 glj 和 constant
  */
 
- let glj;
- glj = "hello world";
- const constant = 10;
- console.log(glj);
- console.log(constant);
+let glj;
+glj = "hello world";
+const constant = 10;
+console.log(glj);
+console.log(constant);

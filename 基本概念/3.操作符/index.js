@@ -38,68 +38,46 @@
  * 2.a 和 str2 全等时，输出 "a === str2"，否则，a 和 b 全等时，输出 "a === b"，否则，输出 "a !== str2 且 a !== b"
  */
 
-/** while 语句
- * 1.定义变量 i，赋值 5
- * 2.定义 while 循环，每次循环 i 都变小 1（分别用 表达式 和 两种自减运算符 实现）
- * 3.每次循环输出 i 的值
- */
-
-/** for 语句
- * 1.用 for 循环实现上面 while 的题目
- * 2.定义一个循环，定义一个变量 j，j 初始为 0，当 j 大于 10 时退出循环，打印每次循环 j 的值
- * 3.在 2 的基础上，每当 j 能被 3 整除时，跳过本次循环并且不打印 j 的值
- * 4.在 3 的基础上，当 j 能被 2 和 3 同时整除时，退出循环
- */
-
-/** switch 语句
- * 1.定义一个循环：定义一个变量 k，初始为 0，当 k 大于 11 时退出循环
- *   当 k 等于 3 时，输出 "k = 3"
- *   当 k 等于 5 时，输出 "k = 5"
- *   当 k 等于 7 或 11 时，输出 "k = 7 或 11"
- * 
- * 2.定义一个循环：定义一个变量 l，初始为 0，当 l 大于 10 时退出循环
- *   当 k 能被 2 整除时，输出 "k 是 2 的公倍数" （k 需要替换为当前 k 的值）
- *   当 k 能被 3 整除时，输出 "k 是 2 的公倍数" （k 需要替换为当前 k 的值）
- *   当 k 能被 5 整除时，输出 "k 是 2 的公倍数" （k 需要替换为当前 k 的值）
- */
-
 function test1() {
   console.log("一元操作符:");
   let a = 1;
-  let b = 1;
+  let b = 2;
   let str = "a";
-  let str2 = "2";
+  let str2 = "5";
   let bool = true;
   let bool2 = false;
-  console.log(++a + 1);
-  console.log(b++ + 1);
-  console.log(str++);
-  console.log(bool--);
-  console.log(+str, +str2);
-  console.log(+bool, +bool2);
-  console.log(-str, -str2);
-  console.log(-bool, -bool2);
+  console.log(++a + 1); /** 3 */
+  console.log(b++ + 1); /** 3 */
+  console.log(str++); /** NaN, 后置递加在应用于一个不包含有效数字的字符串时将转为 NaN */
+  console.log(bool--); /** 1 */
+  console.log(+str, +str2); /** NaN, 5 */
+  console.log(+bool, +bool2); /** 1, 0 */
+  console.log(-str, -str2); /** NaN, -5 */
+  console.log(-bool, -bool2); /** -1, -0 */
 
   console.log("布尔操作符:");
-  console.log(!a); /** 非操作符操作数是非0数值返回false */
-  console.log(!str); /** 非操作符操作数是非空字符串返回false */
-  console.log(!bool); /** 非操作符操作数是boolean则将该值转化为数字后再判断 */
-  console.log(a && b); /** 两操作数都是对象，返回第二个数 */
-  console.log(a && bool2); /** 第二个操作数为false，返回false */
-  console.log(a || b); /** 第一个操作数为对象，返回第一个数 */
-  console.log(bool2 || str); /** 第一个操作数结果为false，返回第二个数 */
+  console.log(!a); /** false, 非操作符操作数是非0数值返回 false */
+  console.log(!str); /** false, 非操作符操作数是非空字符串返回 false */
+  console.log(!bool); /** false, 非操作符操作数是 boolean 则直接取反  */
+  console.log(a && b); /** 3，第一个操作值转化为 boolean 类型后值为 true，则返回第二个值 */
+  console.log(a && bool2); /** false，第一个操作值转化为 boolean 类型后值为 true，则返回第二个值 */
+  console.log(a || b); /** 2，第一个操作值转化为 boolean 类型后值为 true，则返回第一个值 */
+  console.log(bool2 || str); /** "a", 第一个操作数结果为 false，返回第二个值 */
 
   console.log("相等操作符:");
-  console.log(a == b); /** a与b类型相同 */
-  console.log(a === b); /** a与b数值，类型均相同 */
-  console.log(a == str2); /** 强制类型转化后两者都为数值，类型相同 */
-  console.log(a === str2); /** 两操作值类型不相同 */
+  a = 5;
+  b = 5;
+  console.log(a == b); /** true, a 与 b 值相同 */
+  console.log(a === b); /** true, a 与 b 数值，类型均相同 */
+  console.log(a == str2); /** true, 强制类型转化后两者都为数值 */
+  console.log(a === str2); /** false, 两操作值类型不相同 */
 
   console.log("条件操作符:");
-  console.log(a == b ? 'a等于b' : 'a不等于b');
-  console.log(a === str2 ? 'a全等于str2' : 'a不全等于str2');
+  console.log(a == b ? 'a等于b' : 'a不等于b'); /** 'a等于b' */
+  console.log(a === str2 ? 'a全等于str2' : 'a不全等于str2'); /** 'a不全等于str2' */
 
-  console.log("if语句:");
+  console.log("if 语句:");
+  /** "a === b" */
   if (a === str2) {
     console.log("a === str2");
   } else if (a === b) {
@@ -110,6 +88,11 @@ function test1() {
 
 }
 
+/** while 语句
+ * 1.定义变量 i，赋值 5
+ * 2.定义 while 循环，每次循环 i 都变小 1（分别用 表达式 和 两种自减运算符 实现）
+ * 3.每次循环输出 i 的值
+ */
 function test2() {
   console.log("while语句:");
   let i = 5;
@@ -125,6 +108,12 @@ function test2() {
   };
 }
 
+/** for 语句
+ * 1.用 for 循环实现上面 while 的题目
+ * 2.定义一个循环，定义一个变量 j，j 初始为 0，当 j 大于 10 时退出循环，打印每次循环 j 的值
+ * 3.在 2 的基础上，每当 j 能被 3 整除时，跳过本次循环并且不打印 j 的值
+ * 4.在 3 的基础上，当 j 能被 2 和 3 同时整除时，退出循环
+ */
 function test3() {
   console.log("for循环");
   for (let i = 5; i >= 0; i--) {
@@ -147,8 +136,19 @@ function test3() {
   }
 }
 
+/** switch 语句
+ * 1.定义一个循环：定义一个变量 k，初始为 0，当 k 大于 11 时退出循环
+ *   当 k 等于 3 时，输出 "k = 3"
+ *   当 k 等于 5 时，输出 "k = 5"
+ *   当 k 等于 7 或 11 时，输出 "k = 7 或 11"
+ * 
+ * 2.定义一个循环：定义一个变量 l，初始为 0，当 l 大于 10 时退出循环
+ *   当 k 能被 2 整除时，输出 "k 是 2 的公倍数" （k 需要替换为当前 k 的值）
+ *   当 k 能被 3 整除时，输出 "k 是 2 的公倍数" （k 需要替换为当前 k 的值）
+ *   当 k 能被 5 整除时，输出 "k 是 2 的公倍数" （k 需要替换为当前 k 的值）
+ */
 function test4() {
-  console.log("swich:")
+  console.log("switch:")
   for (let k = 0; k <= 11; k++) {
     console.log(k);
     switch (k) {
@@ -168,27 +168,16 @@ function test4() {
 
 function test5() {
   for (let n = 0; n <= 10; n++) {
-    if (n % 2 == 0 && n % 3 == 0 && n % 5 == 0 && n != 0) {
+    if (n % 2 === 0 && n !== 0) {
       console.log(n + "是2的公倍数");
+    }
+
+    if (n % 3 === 0 && n !== 0) {
       console.log(n + "是3的公倍数");
+    }
+
+    if (n % 5 === 0 && n !== 0) {
       console.log(n + "是5的公倍数");
-    } else if (n % 2 == 0 && n % 3 == 0 && n != 0) {
-      console.log(n + "是2的公倍数");
-      console.log(n + "是3的公倍数");
-    } else if (n % 2 == 0 && n % 5 == 0 && n != 0) {
-      console.log(n + "是2的公倍数");
-      console.log(n + "是5的公倍数");
-    } else if (n % 3 == 0 && n % 5 == 0 && n != 0) {
-      console.log(n + "是3的公倍数");
-      console.log(n + "是5的公倍数");
-    } else if (n % 2 == 0 && n != 0) {
-      console.log(n + "是2的公倍数");
-    } else if (n % 3 == 0 && n != 0) {
-      console.log(n + "是3的公倍数");
-    } else if (n % 5 == 0 && n != 0) {
-      console.log(n + "是5的公倍数");
-    } else {
-    console.log(n);
     }
   }
 }
