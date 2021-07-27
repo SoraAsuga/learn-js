@@ -87,6 +87,7 @@ function test1() {
   };
 
 }
+// test1();
 
 /** while 语句
  * 1.定义变量 i，赋值 5
@@ -101,12 +102,20 @@ function test2() {
     console.log(i);
   };
 
-  let L = 5;
-  while (L > 0) {
-    L = --L;
-    console.log(L);
+  console.log("while语句:");
+  let l = 5;
+  while (l > 0) {
+    --l;
+    console.log(l);
+  };
+
+  console.log("while语句:");
+  let p = 5;
+  while (--p > 0) {
+    console.log(p);
   };
 }
+// test2();
 
 /** for 语句
  * 1.用 for 循环实现上面 while 的题目
@@ -120,21 +129,31 @@ function test3() {
     console.log(i);
   }
 
+  console.log("for循环");
   for (let j = 0; j <= 10; j++) {
     console.log(j);
   }
 
+  console.log("for循环");
+  for (let j = 1; j <= 10; j++) {
+    if (j % 3 === 0) {
+      continue;
+    }
+    console.log(j);
+  }
+
+  console.log("for循环");
   for (let j = 1; j <= 10; j++) {
     /** 0与任何数相除都为0,因此从1开始 */
     if (j % 3 == 0 && j % 2 == 0) {
       break;
     } else if (j % 3 == 0) {
       continue;
-    } else {
-      console.log(j);
     }
+    console.log(j);
   }
 }
+// test3();
 
 /** switch 语句
  * 1.定义一个循环：定义一个变量 k，初始为 0，当 k 大于 11 时退出循环
@@ -165,6 +184,7 @@ function test4() {
     }
   }
 }
+// test4();
 
 function test5() {
   for (let n = 0; n <= 10; n++) {
@@ -183,8 +203,4 @@ function test5() {
   }
 }
 
-test1();
-test2();
-test3();
-test4();
 test5();
