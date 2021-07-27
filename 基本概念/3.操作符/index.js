@@ -168,6 +168,7 @@ function test4() {
 
 function test5() {
   for (let n = 0; n <= 10; n++) {
+    console.log(n);
     if (n % 2 === 0 && n !== 0) {
       console.log(n + "是2的公倍数");
     }
