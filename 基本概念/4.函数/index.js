@@ -12,8 +12,18 @@ function say(what) {
 }
 
 function isNullable(unknown) {
-  return unknown === '' || unknown === null || unknown === undefined || unknown === NaN;
+  return unknown === '' || unknown === null || unknown === undefined || String(unknown) === 'NaN';
 }
+
+function render(unknown) {
+  if (isNullable(unknown)) {
+    console.log(unknown + '是无效值');
+    return null;
+  }
+  console.log(unknown + '是有效值');
+  return "glj:" + unknown;
+}
+render(56);
 
 function parseNumber(unknown) {
   const n = Number(unknown);
@@ -34,7 +44,7 @@ console.log(isNullable('')); /** true */
 console.log(isNullable(+'a')); /** false */
 console.log(isNullable(a)); /** true */
 console.log(isNullable(a + '')); /** false */
-console.log(isNullable(null));/** true */
+console.log(isNullable(null)); /** true */
 console.log(isNullable(undefined)); /** true */
 console.log(isNullable(typeof undefined)); /** false */
 console.log(parseNumber(NaN));
@@ -60,3 +70,48 @@ console.log(parseNumber('2333'));
  *          * *
  *          * * *
  */
+function log(some) {
+  return "[debug] " + String(some);
+}
+
+console.log(log(undefined));
+
+function triangle(n) {
+  if (typeof n === 'number' && n % 1 === 0 && n > 0) {
+    for (let i = 1; i <= n; i++) {
+      let num = '';
+      for (let j = 1; j <= i; j++) {
+        num += '*';
+      }
+      console.log(num)
+    }
+    return;
+  }
+  return console.log('n 必须为正整数，但传入的 n 为', n);
+}
+triangle(5);
+
+/** 该函数使用了递归的方法，多次调用自己以达到效果
+ * 在准备写函数时应当先找到函数的数学规律，通过规律来决定函数体的形式
+ */
+function triangle2(n) {
+  /** 该函数使用了两个for循环换以达到打印多行不同内容的目的
+   * 第一个for循环决定该结果有几行
+   * 第二个for循环决定改行有几个结果
+   */
+  for (var i = 0; i < n; i++) {
+    let arr = []; /** 用来放第i行的数 */
+    for (var j = 0; j <= i; j++) {
+      arr.push(calculation(i, j));
+    }
+    console.log(arr.join(' ')); /** 字符串形式输出 */
+  }
+}
+
+function calculation(m, n) {
+  if (n == 0) return 1; /** 第一个数为1 */
+  else if (m == n) return 1; /** 最后一个数为1 */
+  else return calculation(m - 1, n - 1) + calculation(m - 1, n); /** 多次调用函数使得中间的数为前一行的两个数相加 */
+}
+
+triangle2(10);
