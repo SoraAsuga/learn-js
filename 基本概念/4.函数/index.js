@@ -114,4 +114,4 @@ function calculation(m, n) {
   else return calculation(m - 1, n - 1) + calculation(m - 1, n); /** 多次调用函数使得中间的数为前一行的两个数相加 */
 }
 
-triangle2(10);
+triangle2(10); 
