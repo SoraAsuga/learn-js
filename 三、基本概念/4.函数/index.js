@@ -161,3 +161,4 @@ function yangHuiTriangle(n) {
     console.log(temp.join(' '));
   }
 }
+triangle2(10); 
