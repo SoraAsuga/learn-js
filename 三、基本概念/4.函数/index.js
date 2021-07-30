@@ -15,16 +15,6 @@ function isNullable(unknown) {
   return unknown === '' || unknown === null || unknown === undefined || String(unknown) === 'NaN';
 }
 
-function render(unknown) {
-  if (isNullable(unknown)) {
-    console.log(unknown + '是无效值');
-    return null;
-  }
-  console.log(unknown + '是有效值');
-  return "glj:" + unknown;
-}
-render(56);
-
 function parseNumber(unknown) {
   const n = Number(unknown);
   /** NaN 不等于 NaN，因此要转化为字符串形式判断 */
@@ -91,27 +81,83 @@ function triangle(n) {
 }
 triangle(5);
 
-/** 该函数使用了递归的方法，多次调用自己以达到效果
+
+/**
+ * 1.实现一个函数 render，入参 unknown，调用函数 isNullable 判断，
+ *  当 isNullable(unknown) 为假时，打印 unknown 是无效值，并返回 null；为真时打印 unknown 是有效值，并返回 glj: unknown
+ * 
+ * 2.打印一个杨辉三角
+ */
+function render(unknown) {
+  if (isNullable(unknown)) {
+    console.log(unknown + '是无效值');
+    return null;
+  }
+  console.log(unknown + '是有效值');
+  return "glj:" + unknown;
+}
+render(56);
+
+
+/**
+ * 递归法：未优化
+ * 原因：每一层都要全量递归到 (0, 0)，导致性能极差
+ * 
+ * 该函数使用了递归的方法，多次调用自己以达到效果
  * 在准备写函数时应当先找到函数的数学规律，通过规律来决定函数体的形式
  */
 function triangle2(n) {
-  /** 该函数使用了两个for循环换以达到打印多行不同内容的目的
-   * 第一个for循环决定该结果有几行
-   * 第二个for循环决定改行有几个结果
+  /** m 为行号，n 为列号 */
+  function calculation(m, n) {
+    /** 第一个数为 1 */
+    if (n === 0) {
+      return 1;
+    }
+    /** 最后一个数为 1 */
+    if (m === n) {
+      return 1;
+    }
+
+    /** 多次调用函数使得中间的数为前一行的两个数相加 */
+    return calculation(m - 1, n - 1) + calculation(m - 1, n);
+  }
+
+  /** 该函数使用了两个 for 循环换以达到打印多行不同内容的目的
+   * 第一个 for 循环决定该结果有几行
+   * 第二个 for 循环决定改行有几个结果
    */
-  for (var i = 0; i < n; i++) {
-    let arr = []; /** 用来放第i行的数 */
-    for (var j = 0; j <= i; j++) {
+  for (let i = 0; i < n; i++) {
+    let arr = []; /** 用来放第 i 行的数 */
+
+    for (let j = 0; j <= i; j++) {
       arr.push(calculation(i, j));
     }
+
     console.log(arr.join(' ')); /** 字符串形式输出 */
   }
 }
 
-function calculation(m, n) {
-  if (n == 0) return 1; /** 第一个数为1 */
-  else if (m == n) return 1; /** 最后一个数为1 */
-  else return calculation(m - 1, n - 1) + calculation(m - 1, n); /** 多次调用函数使得中间的数为前一行的两个数相加 */
-}
-
 triangle2(10);
+
+/** 迭代法：杨辉三角 */
+function yangHuiTriangle(n) {
+  /** 缓存上一层计算结果 */
+  let parentResult = [];
+
+  for (let x = 0; x < n; x++) {
+    const temp = [];
+
+    /** 行号和列号是相等的 */
+    for (let y = 0; y <= x; y++) {
+      /** 求该坐标上一层左侧数值和右侧数值 */
+      const parentLeftValue = parentResult[y - 1] || 0;
+      const parentRightValue = parentResult[y] || 0;
+      temp[y] = Math.max(1, parentLeftValue + parentRightValue);
+    }
+
+    /** 将本层计算结果缓存到 parentResult */
+    parentResult = temp;
+    /** join 将数组项用空格拼接为字符串 */
+    console.log(temp.join(' '));
+  }
+}
