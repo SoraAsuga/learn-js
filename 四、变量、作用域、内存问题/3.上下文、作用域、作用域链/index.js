@@ -8,10 +8,11 @@
 
 let a = 0;
 function f1() {
-  a = 1
+  a = 1;
   console.log(a);
 }
 f1();
+/** 首先在 f1 的作用域上查找 a，f1 上没有则去上一级作用域查找，直到找到最上层 */
 
 function f2 () {
   a = 2;
@@ -43,7 +44,7 @@ function f3 () {
   console.log(a);
 }
 f3();
-/** a 为全局变量，所有函数都可操作它 */
+/** a 为全局变量，所有函数都可查找到它 */
 
 function f4 () {
   a = 1;
@@ -53,43 +54,47 @@ console.log(a);
 /** a 为全局变量，所有函数都可操作它 */
 
 function f5 () {
-  b = 3;
+  const b = 3;
+  /** 此处定义的 b 只有该函数作用域内能查找到 */
 }
 f5();
 console.log(b);
 /** b 为全局变量，所有函数都可操作它 */
 
 function f6 () {
-  b = 4;
+  let b = 4;
+
   function f1 () {
     b = 5;
     let c = 1;
-    console.log(a, b, c); /**  */
-  }
-  console.log(a, b); /** 加入C导致报错 */
+    console.log(a, b, c); /** 1 5 1，c 为 f1 作用域内的变量，b 为 f6 作用域内的变量，a 为全局变量 */
+  } 
+  console.log(a, b); /** 1 4，加入C导致报错 */
   f1();
-  console.log(a, b); /** 加入C导致报错 */
+  console.log(a, b); /** 1 5，加入C导致报错 */
 }
 f6();
 /** 此处 a b 为全局变量，所有函数都可以操作他们，但是c为只存在于 f1 作用域内的局部变量，f1 执行完毕后即销毁，因此在外部 c 相当于从未被声明，因此报错 */
 
 function fx () {
-  let age = 22;
+  const age = 22;
+
   function printAge () {
     console.log(age);
   }
+
   return printAge;
 }
-// console.log(age);
-printAge = fx();
+// console.log(age); /** 此处 age 为局部变量，因此在外部无法调用 */
+const printAge = fx(); /** 此处将 fx 内部的 printAge 方法赋值给 printAge 变量 */
 console.log(printAge);
-printAge();
-/** 此处age为局部变量，因此在外部无法调用 */
+printAge(); /** 22，此处执行 printAge 方法，fx 返回的 printAge 保留了 age 变量的作用域，形成一个闭包，可以通过 printAge 访问 fx 的作用域 */
+
 
 /**
  * 1.定义函数 ff1，在函数内执行 for 循环，循环 5 次，用 i 做循环变量
- *    在 for 循环内用 var 和 let 分别定义变量 x 和 y，将 i 分别赋值给 x, y
- *    在循环外打印 i, x, y 并说明为什么
+ *    在 for 循环内用 var 和 let 分别定义变量 x 和 g，将 i 分别赋值给 x, g
+ *    在循环外打印 i, x, g 并说明为什么
  * 2.理解 p81 4.3.4
  * 3.根据 2，回过头去看函数 fx 和 printAge，说明存在的问题
  */
@@ -97,11 +102,11 @@ printAge();
 function ff1 () {
   for (let i = 0; i > 5; i++) {
     var x = i;
-    let y = 1;
+    let g = i;
   }
   // console.log(i);
   console.log(x);
-  // console.log(y);
+  // console.log(g);
 }
 ff1();
-/** i x 为在该循环内声明的局部变量，因此在外部无法调用，因此报错，但是使用 var 声明的变量无论在何处声明都为为全局变量，只是赋予变量的值只在该作用域内有效 */
+/** i g 为在该循环内声明的局部变量，因此在外部无法调用，因此报错，但是使用 var 声明的变量无论在何处声明都会进行变量提升 */
