@@ -7,7 +7,40 @@
  * 3.定义一个函数 getInfo，使用 getValue 按照格式打印传入对象的 name，age，male 属性："name: 属性值，age: 属性值，male: 属性值"
  * 4.使用 getInfo 打印 1 创建的两个对象
  */
+let loli = {
 
+  'name': 'loli',
+  'age': 14,
+  'male': 'female'
+
+};
+
+let glj = new Object();
+
+glj.name = 'glj';
+glj.age = 24;
+glj.male = 'male';
+
+console.log(loli.name);
+console.log(glj["name"]);
+
+function getValue(o, key) {
+
+  if (o instanceof Object) {
+    return o[key];
+  }
+
+  return console.log(o, '不是对象');
+}
+
+console.log(getValue(loli, "age"));
+
+function getInfo(o) {
+  return console.log('name:', getValue(o, "name"), '\nage:', getValue(o, "age"), '\nmale:', getValue(o, "male"));
+}
+
+getInfo(loli);
+getInfo(glj);
 
 
 /**
@@ -21,3 +54,15 @@
  *    shouldShow({ list: [], enable: true })
  *    shouldShow({ enable: true })
  */
+function shouldShow(o) {
+
+    if (o instanceof Object && o["list"] && o["enable"] && o.list.length > 0 && o.enable === true) {
+      return console.log(o.list); 
+  }
+  
+  return console.log(o, '不符合要求')
+}
+shouldShow({ list: ['g', 'l', 'j'], enable: true });
+shouldShow({ list: ['g', 'l', 'j'], enable: false });
+shouldShow({ list: [], enable: true });
+shouldShow({ enable: true });
