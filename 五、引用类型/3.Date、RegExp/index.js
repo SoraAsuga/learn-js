@@ -11,6 +11,24 @@
  * 6.封装一个函数 getFormattedDate，获取当前时间，并按照 YYYY-MM-DD HH:mm:ss （如 2000-01-06 09:00:00）格式输出
  * 7.执行 getFormattedDate, 并计算函数执行时间（参考 p100）
  **/
+console.log(new Date());
+console.log(new Date(Date.UTC(2021, 9, 8, 0)));
+console.log(new Date().getTime());
+console.log(new Date().toLocaleDateString(), new Date().toLocaleTimeString());
+console.log('123'.padStart(6, '0'));
+function getFormattedDate() {
+  const start = +new Date();
+  const now = new Date();
+  const mon = (now.getMonth() + 1) + '';
+  const day = (now.getDay() + 1) + '';
+  const hours = now.getHours() + '';
+  const min = now.getMinutes() + '';
+  const sec = now.getSeconds() + '';
+  console.log(now.getFullYear() + '-' + mon.padStart(2, '0') + '-' + day.padStart(2, '0'), hours.padStart(2, '0') + ':' + min.padStart(2, '0') + ':' + sec.padStart(2, '0'));
+  const stop = +new Date();
+  console.log(stop - start);
+}
+getFormattedDate();
 
 
 /** RegExp
@@ -59,3 +77,24 @@
  *    验证用例：'2021-2-12'、'2021-02-12'、'2021-13-12'、'2021-12-00'、'2021/9/20'、'2021/11/11'、'20211/11/11'、'2021/13/01'、'0/0/0'
  *    用例答案：false         true          false         false         false         true          false         false         false
  */
+console.log('RegExp');
+const qq = '123456789';
+const title = 'hello world';
+const pattren1 = /^1/;
+console.log('qq:', pattren1.test(qq), 'title:', pattren1.test(title));
+const pattren2 = /at/i;
+console.log('hat:', pattren2.test('hat'), 'attention:', pattren2.test('attention'), 'chat:', pattren2.test('chat'), 'active:', pattren2.test('active'));
+const pattren3 = /^nd|^ed/;
+console.log('third:', pattren3.test('third'), 'upped:', pattren3.test('upped'), 'end:', pattren3.test('end'), 'second:', pattren3.test('second'), 'edge:', pattren3.test('edge'), 'ed:', pattren3.test('ed'));
+const pattren5 = new RegExp(qq);
+console.log('qq:', pattren5.test(qq));
+const pattren6 = /^(0[0-9][0-9][1-9]-|[1-9][0-9][0-9][0-9]-)(0[1-9]-|1[0-2]-)(0[1-9]|(1|2)[0-9]|3[0|1])*|^(0[0-9][0-9][1-9][/]|[1-9][0-9][0-9][0-9][/])(0[1-9][/]|1[0-2][/])(0[1-9]|(1|2)[0-9]|3[0|1])*/;
+console.log('2021-2-12', pattren6.test('2021-2-12'));
+console.log('2021-02-12', pattren6.test('2021-02-12'));
+console.log('2021-13-12', pattren6.test('2021-13-12'));
+console.log('2021-12-00', pattren6.test('2021-12-00'));
+console.log('2021/9/20', pattren6.test('2021/9/20'));
+console.log('2021/11/11', pattren6.test('2021/11/11'));
+console.log('20211/11/11', pattren6.test('20211/11/11'));
+console.log('2021/13/01', pattren6.test('2021/13/01'));
+console.log('0/0/0', pattren6.test('0/0/0'));
