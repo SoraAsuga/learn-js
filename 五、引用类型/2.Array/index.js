@@ -11,9 +11,10 @@ b[0] = 'g';
 b[1] = 'l';
 b[2] = 'j';
 const c = new Array('g', 'l', 'j');
+
 const glj = ['g', 'l', 'j'];
-console.log('glj[1]:', glj[1]);
-console.log('glj.length:', glj.length);
+console.log('glj[1]:', glj[1], 'glj.length:', glj.length);
+
 glj[3] = 'nb';
 console.log('glj.length:', glj.length);
 console.log('glj:', glj);
@@ -34,17 +35,17 @@ glj.push('nb');
  * 3.判断 window.frames 是否为数组
  * 4.判断 new Array() 是否为数组
  */
-console.log('[]:', Array.isArray([]));
-console.log('[]:', [] instanceof Array);
+console.log('[]:', Array.isArray([])); /** true */
+console.log('[]:', [] instanceof Array); /** true */
 
-console.log('window:', Array.isArray(window));
-console.log('window:', window instanceof Array);
+console.log('window:', Array.isArray(window)); /** false */
+console.log('window:', window instanceof Array); /** false */
 
-console.log('window.frames:', Array.isArray(window.frames));
-console.log('window.frames:', window.frames instanceof Array);
+console.log('window.frames:', Array.isArray(window.frames)); /** false */
+console.log('window.frames:', window.frames instanceof Array); /** false */
 
-console.log('new Array():', Array.isArray(new Array()));
-console.log('new Array():', new Array() instanceof Array);
+console.log('new Array():', Array.isArray(new Array())); /** true */
+console.log('new Array():', new Array() instanceof Array); /** true */
 
 /**
  * 1.理解 p89 [person1, person2].toString() 的结果的原因
@@ -55,17 +56,23 @@ console.log('new Array():', new Array() instanceof Array);
  *    预期输出结果：G, L
  */
 console.log('glj:', glj);
-console.log('glj-:', glj.join('-'))
+console.log('glj-:', glj.join('-'));
 const g = {
-  name: 'G'
+  name: 'G',
+  toString: function () {
+    return this.name;
+  }
 };
 const l = {
-  name: 'L'
+  name: 'L',
+  toString: function () {
+    return this.name;
+  }
 };
 const j = [g, l];
 console.log('j:', j);
 console.log('glj:', j[0].name, j[1].name);
-console.log('glj:', j[0]['name'], j[1]['name']);
+console.log('glj:', j.toString());
 
 
 /**
@@ -124,17 +131,14 @@ function test1() {
     name: 'j',
     age: 22
   }];
-  ao.sort(ageSort);
+  ao.sort((o1, o2) => o1.age - o2.age);
   console.log(ao);
 
-  function ageSort(o1, o2) {
-    return o1.age - o2.age;
-  }
-
   console.log(a1.reverse().reverse());
+  /** 因为 reverse() 执行会操作原数组，因此第二个 .reverse() 相当于在第一个 .reverse() 的结果上执行，因此可以连续点式调用 */
 }
 test1();
-/** 因为 reverse() 执行会操作原数组，因此第二个 .reverse() 相当于在第一个 .reverse() 的结果上执行，因此可以连续点式调用 */
+
 
 /**
  * 操作方法
@@ -158,6 +162,7 @@ function test2() {
   /** slice() 方法基于当前数组中的一或多个项创建一个新数组, 能够接受一或两个参数，即要返回项的起始和结束位置。*/
   const a5 = a3.splice(0, 3);
   console.log('a3:', a3);
+  console.log('a5:', a5);
   /** splice() 方法可以删除任意数量的项，提供两个参数，要删除的第一项位置和要删除的项数 */
   console.log('a2.unshift(3, 4):', a2.unshift(3, 4));
   console.log('a2:', a2);
@@ -197,6 +202,13 @@ function test3() {
   console.log('IndexOf:', ao.indexOf({
     name: 'glj'
   }));
+  /** Array.findIndex, Array.find */
+  console.log('findIndex:', ao.findIndex((o) => o.name === o1.name));
+
+
+  /** demo */
+  const aoo = [o1, o2];
+  console.log('IndexOf:', aoo.indexOf(o1));
 }
 test3();
 
@@ -216,9 +228,7 @@ function test4() {
 
   const a = [1, 2, 3, 4];
 
-  const result = a.every((num) => {
-    return num > 0;
-  });
+  const result = a.every((num) => num > 0);
 
   if (result) {
     return console.log('every: 这是一个正数数组');
@@ -228,9 +238,7 @@ test4();
 
 function test5() {
   const b = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const b1 = b.filter((num) => {
-    return num % 2 === 0 || num % 3 === 0;
-  });
+  const b1 = b.filter((num) => num % 2 === 0 || num % 3 === 0);
   console.log('filter:', b, b1);
 
   const c = [{
@@ -247,9 +255,7 @@ function test5() {
   }, {
     name: 'nb'
   }];
-  const d1 = d.map((num) => {
-    return num.name;
-  });
+  const d1 = d.map((num) => num.name);
   console.log('map:', d, d1);
 
   const e = [{
@@ -277,15 +283,11 @@ function test5() {
   console.log("技能：", f, f1);
 
   function skillQuery(skill) {
-
     const result = skill.filter((skill) => {
       return skill.children.length !== 0;
     });
 
-    if (result === []) {
-      return false;
-    }
-    return true;
+    return result.length !== 0;
   };
   console.log('filter-some:', skillQuery(e));
 }
@@ -300,25 +302,35 @@ test5();
  * 
  * 1.定义数组 [1, 2, 3, 4, 5]
  * 2.使用 reduce 返回数组的和，并打印每次执行操作时的 index，并说明为什么
- * 3.使用 reduce 返回 5 加上数组每一项的和（ps. 用 initialValue），并打印每次执行操作时的 index，并说明为什么
+ * 3.使用 reduce 返回 5 加上数组的和（ps. 用 initialValue），并打印每次执行操作时的 index，并说明为什么
  * 4.定义数组 [{ name: 'glj', age: 22 }, { name: 'nb', age: 23 }]，使用 reduce 返回一个对象：{ glj: 22, nb: 23 }
  */
 function test6() {
   const a = [1, 2, 3, 4, 5];
-  const a1 = a.reduce((num1, num2, index) => {
+  const a1 = a.reduce((sum, num, index) => {
     console.log('index:', index);
-    return num1 + num2;
+    return sum + num;
   });
   console.log('reduce:', a, a1);
   /** index 返回的为 reduce 当前元素的索引，num1 为初始值/上次计算的结果，num2 为当前元素 */
 
-  const b = [];
+  const b = a.reduce((sum, num, index) => {
+    console.log('index:', index);
+    return sum + num;
+  }, 5);
 
-  const c =  [{ name: 'glj', age: 22 }, { name: 'nb', age: 23 }];
+  const c = [{ name: 'glj', age: 22 }, { name: 'nb', age: 23 }];
   const c1 = c.reduce((name, age, index) => {
     console.log('index:', index);
     return name + ':' + age;
   });
   console.log(c1);
+
+  const o = c.reduce((o, item, index) => {
+    console.log('index:', index);
+    o[item.name] = item.age;
+    return o;
+  }, {});
+  console.log(o);
 }
 test6();

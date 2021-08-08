@@ -4,15 +4,13 @@
  * 3.定义一个函数 getValue，接受两个参数，第一个是 o，第二个是 key，函数打印对象 o 的 key 属性
  *    注意判断 o 的类型，非对象时，打印： o 不是对象，并返回
  *    key 是入参，是动态变化的，不是 o 里面名为 key 的属性
- * 3.定义一个函数 getInfo，使用 getValue 按照格式打印传入对象的 name，age，male 属性："name: 属性值，age: 属性值，male: 属性值"
+ * 3.定义一个函数 getInfo，使用 getValue 按照格式打印传入对象的 name，age，male 属性：'name: 属性值，age: 属性值，male: 属性值'
  * 4.使用 getInfo 打印 1 创建的两个对象
  */
 let loli = {
-
   'name': 'loli',
   'age': 14,
   'male': 'female'
-
 };
 
 let glj = new Object();
@@ -22,21 +20,22 @@ glj.age = 24;
 glj.male = 'male';
 
 console.log(loli.name);
-console.log(glj["name"]);
+console.log(glj['name']);
 
 function getValue(o, key) {
-
-  if (o instanceof Object) {
+  if (typeof o === 'object') {
+    console.log(o[key]);
     return o[key];
   }
 
-  return console.log(o, '不是对象');
+  console.log(o, '不是对象');
+  return;
 }
 
-console.log(getValue(loli, "age"));
+console.log(getValue(loli, 'age'));
 
 function getInfo(o) {
-  return console.log('name:', getValue(o, "name"), '\nage:', getValue(o, "age"), '\nmale:', getValue(o, "male"));
+  console.log('name:', getValue(o, 'name'), '\nage:', getValue(o, 'age'), '\nmale:', getValue(o, 'male'));
 }
 
 getInfo(loli);
@@ -54,14 +53,19 @@ getInfo(glj);
  *    shouldShow({ list: [], enable: true })
  *    shouldShow({ enable: true })
  */
-function shouldShow(o) {
-
-    if (o instanceof Object && o["list"] && o["enable"] && o.list.length > 0 && o.enable === true) {
-      return console.log(o.list); 
+function shouldShow(props) {
+  if (typeof props === 'object') {
+    console.log(props, '不符合要求');
+    return;
   }
-  
-  return console.log(o, '不符合要求')
+
+  const { list, enable } = props;
+
+  if (list && list.length > 0 && enable) {
+    console.log(list);
+  }
 }
+
 shouldShow({ list: ['g', 'l', 'j'], enable: true });
 shouldShow({ list: ['g', 'l', 'j'], enable: false });
 shouldShow({ list: [], enable: true });
