@@ -11,25 +11,25 @@
  * 6.封装一个函数 getFormattedDate，获取当前时间，并按照 YYYY-MM-DD HH:mm:ss （如 2000-01-06 09:00:00）格式输出
  * 7.执行 getFormattedDate, 并计算函数执行时间（参考 p100）
  **/
-console.log(new Date());
-console.log(new Date(Date.UTC(2021, 9, 8, 0)));
-console.log(new Date().getTime());
+console.log(new Date(), Date.now());
+console.log(new Date('2021-10-08'));
+console.log(new Date().getTime(), +new Date());
 console.log(new Date().toLocaleDateString(), new Date().toLocaleTimeString());
 console.log('123'.padStart(6, '0'));
 function getFormattedDate() {
-  const start = +new Date();
   const now = new Date();
-  const mon = (now.getMonth() + 1) + '';
-  const day = (now.getDay() + 1) + '';
-  const hours = now.getHours() + '';
-  const min = now.getMinutes() + '';
-  const sec = now.getSeconds() + '';
+  const mon = String(now.getMonth() + 1);
+  const day = String(now.getDate() + 1);
+  const hours = String(now.getHours());
+  const min = String(now.getMinutes());
+  const sec = String(now.getSeconds());
   console.log(now.getFullYear() + '-' + mon.padStart(2, '0') + '-' + day.padStart(2, '0'), hours.padStart(2, '0') + ':' + min.padStart(2, '0') + ':' + sec.padStart(2, '0'));
-  const stop = +new Date();
-  console.log(stop - start);
 }
-getFormattedDate();
 
+const start = +new Date();
+getFormattedDate();
+const stop = +new Date();
+console.log('time', stop - start);
 
 /** RegExp
  * 元字符
@@ -37,6 +37,7 @@ getFormattedDate();
  *    \D: 匹配非数字字符
  *    \w: 匹配任一英文字符（包括英文下划线），例 /\w/: '1' 不匹配，'_' 匹配，'a' 匹配
  *    \W: 匹配任一非英文字符（且不匹配英文下划线）
+ *    \b: 匹配单词边界，例 /\bcat/: 'cat' 匹配，'bcat' 不匹配，'hat cat' 匹配
  *    ^: 开头标记，字符串必须匹配开头，例 /^1/: '1' 匹配，'01' 不匹配
  *    $: 结尾标记，字符串必须匹配结尾，例 /233$/: '1233' 匹配，'23333' 不匹配
  *    |: 或，例 /123|234/: '123' 匹配，'234' 匹配
@@ -80,21 +81,23 @@ getFormattedDate();
 console.log('RegExp');
 const qq = '123456789';
 const title = 'hello world';
-const pattren1 = /^1/;
-console.log('qq:', pattren1.test(qq), 'title:', pattren1.test(title));
-const pattren2 = /at/i;
-console.log('hat:', pattren2.test('hat'), 'attention:', pattren2.test('attention'), 'chat:', pattren2.test('chat'), 'active:', pattren2.test('active'));
-const pattren3 = /^nd|^ed/;
-console.log('third:', pattren3.test('third'), 'upped:', pattren3.test('upped'), 'end:', pattren3.test('end'), 'second:', pattren3.test('second'), 'edge:', pattren3.test('edge'), 'ed:', pattren3.test('ed'));
-const pattren5 = new RegExp(qq);
-console.log('qq:', pattren5.test(qq));
-const pattren6 = /^(0[0-9][0-9][1-9]-|[1-9][0-9][0-9][0-9]-)(0[1-9]-|1[0-2]-)(0[1-9]|(1|2)[0-9]|3[0|1])*|^(0[0-9][0-9][1-9][/]|[1-9][0-9][0-9][0-9][/])(0[1-9][/]|1[0-2][/])(0[1-9]|(1|2)[0-9]|3[0|1])*/;
-console.log('2021-2-12', pattren6.test('2021-2-12'));
-console.log('2021-02-12', pattren6.test('2021-02-12'));
-console.log('2021-13-12', pattren6.test('2021-13-12'));
-console.log('2021-12-00', pattren6.test('2021-12-00'));
-console.log('2021/9/20', pattren6.test('2021/9/20'));
-console.log('2021/11/11', pattren6.test('2021/11/11'));
-console.log('20211/11/11', pattren6.test('20211/11/11'));
-console.log('2021/13/01', pattren6.test('2021/13/01'));
-console.log('0/0/0', pattren6.test('0/0/0'));
+const pattern1 = /^1/;
+console.log('qq:', pattern1.test(qq), 'title:', pattern1.test(title));
+const pattern2 = /at/i;
+console.log('hat:', pattern2.test('hat'), 'attention:', pattern2.test('attention'), 'chat:', pattern2.test('chat'), 'active:', pattern2.test('active'));
+const pattern3 = /(nd|ed)$/;
+console.log('third:', pattern3.test('third'), 'upped:', pattern3.test('upped'), 'end:', pattern3.test('end'), 'second:', pattern3.test('second'), 'edge:', pattern3.test('edge'), 'ed:', pattern3.test('ed'));
+const pattern4 = /\b[a-z]*(nd|ed)$/i;
+console.log('third:', pattern4.test('third'), 'upped:', pattern4.test('upped'), 'end:', pattern4.test('end'), 'second:', pattern4.test('second'), 'edge:', pattern4.test('edge'), 'ed:', pattern4.test('ed'));
+const pattern5 = new RegExp(qq);
+console.log('qq:', pattern5.test(qq));
+const pattern6 = /\d{4}[-/](0[1-9]|1[0-2])[-/](0[1-9]|[12]\d|[3][01])/;
+console.log('2021-2-12', pattern6.test('2021-2-12'));
+console.log('2021-02-12', pattern6.test('2021-02-12'));
+console.log('2021-13-12', pattern6.test('2021-13-12'));
+console.log('2021-12-00', pattern6.test('2021-12-00'));
+console.log('2021/9/20', pattern6.test('2021/9/20'));
+console.log('2021/11/11', pattern6.test('2021/11/11'));
+console.log('20211/11/11', pattern6.test('20211/11/11'));
+console.log('2021/13/01', pattern6.test('2021/13/01'));
+console.log('0/0/0', pattern6.test('0/0/0'));
