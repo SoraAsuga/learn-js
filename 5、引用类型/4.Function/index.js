@@ -19,3 +19,91 @@
  *    利用 typeof 和 instanceof 判断实例的成分，理解构造函数
  *    打印两个实例，打印两个实例的 type 和 food 属性
  */
+
+// add1(1, 2);
+// add2(1, 2); 执行时函数还未声明，因此报错
+function add1(a, b) {
+  return a + b;
+}
+console.log(add1(1, 2));
+
+const sum = function (a, b) {
+  console.log(arguments.callee.caller);
+  return a + b;
+}
+
+console.log(sum(1, 2));
+
+console.log(sum(sum(1, 2), 3));
+
+function map(handler, array) {
+  const hand = handler;
+
+  for (let i = 0; i <= array.length; i++) {
+    hand(item, index, array);
+  }
+  return;
+}
+
+function createCounter() {
+  let count;
+
+  function add() {
+    return ++count;
+  }
+
+  function dec() {
+    return --count;
+  }
+
+  return {
+    add,
+    dec
+  };
+}
+
+function log1() {
+  const lent = arguments.length;
+  const logs = []
+  for (let i = 0; i < lent; i++) {
+    logs[i] = arguments[i];
+  }
+  console.log(logs);
+}
+log1(1, 2, 3, 4, 5);
+
+function log2(...a) {
+  console.log(...a);
+}
+log2(1, 2, 3, 4, 5);
+
+const o = {
+  name: "loli",
+  getName: function () {
+    return this.name;
+  },
+};
+
+const o2 = {
+  name: 'glj'
+};
+
+console.log(o.getName.call(o2));
+
+function getValue () {
+  return this.name;
+}
+const getO = getValue.bind(o);
+console.log(getO());
+
+function Animal (type, food) {
+  this.type = type,
+  this.food = food
+}
+Animal.prototype.eatWhat = function () {
+  return this.type + ' eat ' + this.food;
+}
+const cat = new Animal('cat', 'fish');
+const dog = new Animal('dog', 'bone');
+console.log('typeof cat:', typeof cat, 'typeof dog:', typeof dog, '\ninstanceof cat:', cat instanceof Object,  '\ninstanceof dog:', dog instanceof Object, 'cat:', cat, 'dog:', dog, 'catType:', cat.type, 'catFood:', cat.food, 'dogType:', dog.type, 'dogFood:', dog.food);
+console.log(cat.eatWhat(), '\n', dog.eatWhat());

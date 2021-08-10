@@ -4,6 +4,16 @@
  * 3.将 7 转化为 2 进制
  */
 
+ /** 有基本包装类型的包括 Boolean, Number, String 类型 */
+ console.log('第一题');
+ let pi = new Number(Math.PI);
+ let pi2 = pi.toExponential(2);
+ console.log(pi2);
+
+ let num = new Number(7);
+ console.log(num.toString(2));
+ 
+
 /**
  * 1.定义变量 str = '123456'
  * 2.两种方式获取 str 的第 3 个字符
@@ -14,6 +24,25 @@
  * 7.定义变量 s = ' 123 '
  * 8.删除 s 的前缀空格（trimStart），删除 s 的后缀空格（trimEnd），删除 s 的前后空格
  */
+console.log('第二题')
+ let str1 = '123456';
+ console.log('charAt:', str1.charAt(2), '[]:', str1[2]);
+
+ let str2 = '';
+ for (let i = (str1.length - 1); i >= 0; i--) {
+   str2 += str1[i];
+ }
+ console.log(str2);
+
+ const str3 = str1.slice(0, 3);
+ console.log(str3);
+  
+ const str4 = str1.slice(-2);
+ console.log(str4);
+
+ let s = ' 123 ';
+ const s2 = s.trim();
+ console.log(s2);
 
 /**
  * 1.定义变量 str = 'gLJ'，sentence = 'this is a cat, this is a hat'
@@ -27,3 +56,14 @@
  * 9.将 sentence 按照单词转为数组
  * 10.将转为数组的 sentence 用空格拼接为字符串
  */
+
+ console.log('第三题')
+let str = 'gLJ';
+let sentence = 'this is a cat, this is a hat';
+console.log(str.toUpperCase());
+console.log(str.toLowerCase());
+const pattern = /(\wat)/g;
+console.log(sentence.match(pattern));
+const pattern2 = / /g;
+console.log(' hello world'.replace(pattern2, '_'));
+console.log(sentence.replace(pattern, '[$1]'))
