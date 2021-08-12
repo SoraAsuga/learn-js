@@ -66,4 +66,19 @@ const pattern = /(\wat)/g;
 console.log(sentence.match(pattern));
 const pattern2 = / /g;
 console.log(' hello world'.replace(pattern2, '_'));
-console.log(sentence.replace(pattern, '[$1]'))
+console.log(sentence.replace(pattern, '[$1]'));
+
+let hel = 'hello world';
+hel.to
+hel.toLowerCase();
+let hel1 = hel.charAt(0).toUpperCase() + hel.slice(1);
+console.log(hel1);
+
+let strArray = str.split("");
+console.log(strArray);
+
+const pattern3 = / ?(\w+) ?/g;
+const sent = sentence.match(pattern3);
+console.log(sent);
+const sent2 = sent.join(" ");
+console.log(sent2);
