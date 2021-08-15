@@ -28,7 +28,7 @@ function add1(a, b) {
 console.log(add1(1, 2));
 
 const sum = function (a, b) {
-  console.log(arguments.callee.caller);
+  console.log(arguments);
   return a + b;
 }
 
@@ -37,16 +37,13 @@ console.log(sum(1, 2));
 console.log(sum(sum(1, 2), 3));
 
 function map(handler, array) {
-  const hand = handler;
-
-  for (let i = 0; i <= array.length; i++) {
-    hand(item, index, array);
+  for (let i = 0; i < array.length; i++) {
+    handler(item, index, array);
   }
-  return;
 }
 
 function createCounter() {
-  let count;
+  let count = 0;
 
   function add() {
     return ++count;
@@ -63,9 +60,9 @@ function createCounter() {
 }
 
 function log1() {
-  const lent = arguments.length;
-  const logs = []
-  for (let i = 0; i < lent; i++) {
+  const len = arguments.length;
+  const logs = [];
+  for (let i = 0; i < len; i++) {
     logs[i] = arguments[i];
   }
   console.log(logs);
@@ -88,13 +85,12 @@ const o2 = {
   name: 'glj'
 };
 
-console.log(o.getName.call(o2));
+console.log('9', o.getName.call(o2));
 
-function getValue () {
-  return this.name;
+function getValue (key) {
+  return this[key];
 }
-const getO = getValue.bind(o);
-console.log(getO());
+console.log(getValue.call(o, 'name'));
 
 function Animal (type, food) {
   this.type = type,

@@ -3,7 +3,7 @@
  * 2.解码刚刚编码的字符串
  */
 
- const uri = "https://www.baidu.com?s=glj";
+ const uri = 'https://www.baidu.com?s=glj';
  const uri1 = encodeURIComponent(uri);
  console.log(uri1);
  console.log(decodeURIComponent(uri1));
@@ -20,8 +20,8 @@
  console.log(Math.max(1, -1, 10));
  console.log(Math.min(1, -1, 10));
  function toInt (num) {
-   return num === 0 ? 0 : Math.floor(num);
+   return Math.max(0, Math.floor(num));
  }
-console.log(toInt(123.312));
+console.log(toInt(123.312), toInt(-23.312));
 const num = Math.floor(Math.random() * 10 + 1);
 console.log(num);
