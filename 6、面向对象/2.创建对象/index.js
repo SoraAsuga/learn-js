@@ -5,27 +5,27 @@
  * 4.利用刚刚实现的构造函数创建任意一个对象（实例）glj，并使用 instanceof 理解构造函数创建的对象和构造函数的关系
  */
 
- function createPerson (name, age) {
-   const o = new Object();
-   o.name = name;
-   o.age = age;
-   return o;
- }
+function createPerson(name, age) {
+  const o = new Object();
+  o.name = name;
+  o.age = age;
+  return o;
+}
 
- const glj = createPerson('glj', 23);
- const loli = createPerson('loli', 14);
- console.log(glj, loli);
+const glj = createPerson('glj', 23);
+const loli = createPerson('loli', 14);
+console.log(glj, loli);
 
- function Person (name, age) {
-   this.name = name;
-   this.age = age;
-   this.sayName = function () {
-     console.log(this.name);
-   };
- }
- let glj2 = new Person('glj', 24);
- console.log(glj2, glj2 instanceof Object, glj2 instanceof Person);
- 
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.sayName = function () {
+    console.log(this.name);
+  };
+}
+let glj2 = new Person('glj', 24);
+console.log(glj2, glj2 instanceof Object, glj2 instanceof Person);
+
 /** 原型模式
  * 1.理解 prototype，理解 p148 图，精读 6.2.3 小节
  * 2.给上面实现的构造函数增加一个原型方法 sayHi，方法打印 'name say: hi.' （name 为对象属性）

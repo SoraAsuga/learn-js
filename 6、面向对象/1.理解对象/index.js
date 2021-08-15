@@ -11,10 +11,10 @@ const glj = {
   }
 };
 glj.sayName();
-Object.defineProperty(glj, "nb", {
+Object.defineProperty(glj, 'nb', {
   get: function () {
     console.log(this.name);
-    return "gljnb";
+    return 'gljnb';
   }
 });
 console.log(glj.nb);

@@ -31,7 +31,7 @@ gdx.sayName();
  * 3.理解书上提到的所有继承方式的优缺点（可以百度一下进行理解）
  */
 function inheritPrototype (subType, superType) {
-  const prototype = object(superType.prototype);
+  const prototype = new Object(superType.prototype);
   prototype.constructor = subType;
   subType.prototype = prototype;
 }
