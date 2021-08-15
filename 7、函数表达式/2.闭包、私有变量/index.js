@@ -9,32 +9,32 @@
  *    当 glj 已经定义时返回 glj
  */
 
- function createArray(num) {
+function createArray(num) {
 
-   const result = new Array();
+  const result = new Array();
 
-   for (var i = 0; i <= num; i++) {
+  for (var i = 0; i <= num; i++) {
 
-     result[i] = function (num1) {
-       return function () {
-         return num1;
-       }
-     }(i);
-   }
+    result[i] = function (num1) {
+      return function () {
+        return num1;
+      }
+    }(i);
+  }
 
-   return result;
- }
- const arr = createArray(10);
- console.log(arr[0]());
+  return result;
+}
+const arr = createArray(10);
+console.log(arr[0]());
 
- function Glj () {
-   this.secret = 'glj is lolikon';
-   this.seeSecret = function () {
-     const that = this;
-     return function () {
-       return that.secret;
-     };
-   }
- }
- const glj = new Glj();
- console.log(glj.seeSecret()());
+function Glj() {
+  this.secret = 'glj is lolikon';
+  this.seeSecret = function () {
+    const that = this;
+    return function () {
+      return that.secret;
+    };
+  }
+}
+const glj = new Glj();
+console.log(glj.seeSecret()());
