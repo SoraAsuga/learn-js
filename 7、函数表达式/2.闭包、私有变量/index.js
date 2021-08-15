@@ -25,16 +25,25 @@ function createArray(num) {
   return result;
 }
 const arr = createArray(10);
-console.log(arr[0]());
+console.log(arr[0](), arr[1]());
 
 function Glj() {
-  this.secret = 'glj is lolikon';
+  const secret = 'glj is lolikon';
   this.seeSecret = function () {
-    const that = this;
-    return function () {
-      return that.secret;
-    };
+    return secret;
   }
 }
 const glj = new Glj();
-console.log(glj.seeSecret()());
+console.log(glj.seeSecret());
+
+const getGlj = (function () {
+  let glj;
+
+  return function () {
+    if (!glj) {
+      glj = new Glj();
+    }
+  
+    return glj;
+  }
+})();
