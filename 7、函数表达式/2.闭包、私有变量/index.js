@@ -8,3 +8,33 @@
  * 5.理解单例模式，并结合闭包创建一个函数 getGlj，有一个私有变量 glj，当 glj 未定义时实例化一个 Glj 并赋值给 glj，
  *    当 glj 已经定义时返回 glj
  */
+
+ function createArray(num) {
+
+   const result = new Array();
+
+   for (var i = 0; i <= num; i++) {
+
+     result[i] = function (num1) {
+       return function () {
+         return num1;
+       }
+     }(i);
+   }
+
+   return result;
+ }
+ const arr = createArray(10);
+ console.log(arr[0]());
+
+ function Glj () {
+   this.secret = 'glj is lolikon';
+   this.seeSecret = function () {
+     const that = this;
+     return function () {
+       return that.secret;
+     };
+   }
+ }
+ const glj = new Glj();
+ console.log(glj.seeSecret()());

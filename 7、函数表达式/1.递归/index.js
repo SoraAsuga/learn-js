@@ -4,3 +4,14 @@
  *    一个长度为 10 的费波纳茨数列：1 1 2 3 5 8 13 21 34 55
  * 3.用刚刚实现的函数输出长度为 10 的费波纳茨数列
  */
+
+function fibonacci(num) {
+
+  if (num == 1 || num == 2) {
+      return 1
+  };
+  
+  return fibonacci(num - 2) + fibonacci(num - 1);
+}
+
+console.log(fibonacci(10));
