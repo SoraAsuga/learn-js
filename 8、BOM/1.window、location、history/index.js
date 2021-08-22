@@ -9,6 +9,17 @@
  * 8.5s 后取消轮询
  */
 
+console.log(window.screenTop, window.screenLeft, window.innerHeight, window.innerWidth, window.outerHeight, window.outerWidth);
+const x = (1040 - Number(window.outerHeight)) / 2;
+const y = (1920 - Number(window.outerWidth)) / 2
+window.moveTo(x, y);
+window.innerWidth = 1280;
+window.innerHeight = 720;
+const Baidu = window.open('https://www.baidu.com/', 'BaiDu');
+setTimeout(function () {
+  Baidu.close()
+}, 5000);
+
 /**
  * 1.获取当前网页地址
  * 2.获取当前网页域名
@@ -17,8 +28,38 @@
  * 5.获取当前网页哈希（hash）
  */
 
+console.log('地址', window.location.href, '域名', window.location.host);
+location.hash = '?glj=1&learn=2';
+
+function getQueryStringArgs() {
+  const qs = (location.search.length > 0 ? location.search.substring(1) : '');
+  const args = {};
+  let items = qs.length ? qs.split('&') : [];
+  let item = null;
+  let name = null;
+  let value = null;
+  let len = items.length;
+
+  for (let i = 0; i < len; i++) {
+    item = items[i].split('=');
+    name = decodeURIComponent(item[0]);
+    value = decodeURIComponent(item[1]);
+
+    args[i] = toString(name) + ': ' + toString(value);
+  }
+  return args;
+}
+console.log(getQueryStringArgs());
+console.log(location.hash);
+
 /**
  * 1.后退网页一次
  * 2.前进网页一次
  * 3.跳转到百度
  */
+
+history.go(-1);
+/** history.back() */
+history.go(1);
+/** history.forward() */
+history.go('www.baidu.com');

@@ -8,3 +8,22 @@
  * 7.设置 glj 的属性 name 为 glj
  * 8.获取 glj 的父节点
  */
+
+const draft = document.querySelector('#draft');
+const p1 = document.createElement('p');
+p1.innerHTML = 'glj';
+draft.appendChild(p1);
+
+const p2 = document.createElement('p');
+p2.innerHTML = 'glj2';
+draft.insertBefore(p2, draft.childNodes[0]);
+
+setTimeout(function () {
+  draft.removeChild(draft.firstChild)
+}, 3000);
+
+const a = document.querySelector('#draft').children[2];
+const a1 = document.querySelector('#draft').lastElementChild;
+a.localName;
+a.setAttribute('name', 'glj');
+const a2 = a.parentNode;
