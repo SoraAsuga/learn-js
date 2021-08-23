@@ -1,5 +1,5 @@
 /**
- * 1.创建 style 元素，编写样式将 id 为 draft 的元素边框设置为黑色，插入到 head
+ * 
  * 2.循环插入 10 个 p 标签，内容分别为从 1 到 10 递增的自然数
  * 3.获取第 8 个 p 标签，并将其文本改为蓝色
  * 4.获取第 8 个 p 标签的前后所有兄弟节点
@@ -11,3 +11,12 @@
  * 10.获取 button 的父节点，并获取 button 的宽高、相对页面的 x y 坐标（p321）
  * 11.理解 offsetXXX、clientXXX、scrollXXX 三种位置属性的用法（p321）
  */
+// 1.创建 style 元素，编写样式将 id 为 draft 的元素边框设置为黑色，插入到 head
+const style = document.createElement('style');
+style.type = 'text/css';
+style.innerHTML = `
+  #draft {
+    border: 1px solid black;
+  }
+`;
+document.head.appendChild(style);

@@ -15,10 +15,11 @@ const y = (1920 - Number(window.outerWidth)) / 2
 window.moveTo(x, y);
 window.innerWidth = 1280;
 window.innerHeight = 720;
-const Baidu = window.open('https://www.baidu.com/', 'BaiDu');
+const baidu = window.open('https://www.baidu.com/', 'baiDu');
 setTimeout(function () {
-  Baidu.close()
+  baidu.close()
 }, 5000);
+
 
 /**
  * 1.获取当前网页地址
@@ -32,7 +33,7 @@ console.log('地址', window.location.href, '域名', window.location.host);
 location.hash = '?glj=1&learn=2';
 
 function getQueryStringArgs() {
-  const qs = (location.search.length > 0 ? location.search.substring(1) : '');
+  const qs = location.search.length > 0 ? location.search.substring(1) : '';
   const args = {};
   let items = qs.length ? qs.split('&') : [];
   let item = null;
