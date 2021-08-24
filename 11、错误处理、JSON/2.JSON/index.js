@@ -9,11 +9,12 @@ const o = {
   sex: true,
   child: null,
   wife: undefined,
+  gdx: NaN,
   friends: ['glj', 'xxx'],
   say: function () {}
 };
 
-// 2.序列号 o 为 json 字符串，要求每行空两格，并对比对象 o
+// 2.序列化 o 为 json 字符串，要求每行空两格，并对比对象 o
 const jsonO = JSON.stringify(o, null, 2);
 console.log('o:', o, 'json:',  jsonO);
 

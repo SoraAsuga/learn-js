@@ -59,7 +59,7 @@ function createCounter() {
   };
 }
 
-function log1() {
+function log1() { 
   const len = arguments.length;
   const logs = [];
   for (let i = 0; i < len; i++) {
