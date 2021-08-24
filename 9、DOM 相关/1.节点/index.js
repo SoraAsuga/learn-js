@@ -11,11 +11,11 @@
 
 const draft = document.querySelector('#draft');
 const p1 = document.createElement('p');
-p1.innerHTML = 'glj';
+p1.innerText = 'glj';
 draft.appendChild(p1);
 
 const p2 = document.createElement('p');
-p2.innerHTML = 'glj2';
+p2.innerText = 'glj2';
 draft.insertBefore(p2, draft.childNodes[0]);
 
 setTimeout(function () {
@@ -24,6 +24,6 @@ setTimeout(function () {
 
 const a = document.querySelector('#draft').children[2];
 const a1 = document.querySelector('#draft').lastElementChild;
-a.localName;
+console.log(a.localName);
 a.setAttribute('name', 'glj');
-const a2 = a.parentNode;
+console.log(a.parentNode);

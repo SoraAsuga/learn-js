@@ -320,17 +320,20 @@ function test6() {
   }, 5);
 
   const c = [{ name: 'glj', age: 22 }, { name: 'nb', age: 23 }];
+
+  /** 错误方法 */
   const c1 = c.reduce((name, age, index) => {
     console.log('index:', index);
     return name + ':' + age;
   });
   console.log(c1);
 
-  const o = c.reduce((o, item, index) => {
+  /** 正确方法 */
+  const o233 = c.reduce((o, item, index) => {
     console.log('index:', index);
     o[item.name] = item.age;
     return o;
   }, {});
-  console.log(o);
+  console.log(o233);
 }
 test6();
